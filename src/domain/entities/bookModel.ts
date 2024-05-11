@@ -1,10 +1,4 @@
-enum Status {
-  NOT_STARTED,
-  STARTED,
-  IN_PROGRESS,
-  COMPLETED,
-  ABANDONED,
-}
+import { Status as PrismaStatus } from "@prisma/client"; // Importe o enum Status do Prisma
 
 export class BookModel {
   constructor(
@@ -12,6 +6,6 @@ export class BookModel {
     public title: string,
     public author: string,
     public volume: number | null,
-    public status?: Status,
+    public status: PrismaStatus,
   ) {}
 }
