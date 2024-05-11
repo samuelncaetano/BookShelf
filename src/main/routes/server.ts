@@ -1,4 +1,8 @@
 import express, { Express, RequestHandler } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 import bookRoutes from "./bookRoutes/BookRoutes";
 
@@ -13,7 +17,8 @@ class Server {
 
   private config(): void {
     this.app.use(express.json());
-    this.port = parseInt("3000");
+    this.app.use(cors());
+    this.port = parseInt(process.env.PORT || "3000");
   }
 
   public routes(...routes: RequestHandler[]): void {
