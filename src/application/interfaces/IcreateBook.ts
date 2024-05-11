@@ -1,5 +1,13 @@
-import { BookModel } from "@/domain/entities/bookModel";
+import { Book } from "@/domain/entities/Book";
+import { Status as PrismaStatus } from "@prisma/client";
 
-export interface IcreateBook {
-  createBook(book: BookModel): Promise<Omit<BookModel, "id">>;
+export interface CreateBookParams {
+  title: string;
+  author: string;
+  volume?: number | null;
+  status?: PrismaStatus | null;
+}
+
+export interface ICreateBookRepository {
+  createBook(params: CreateBookParams): Promise<Book>;
 }
