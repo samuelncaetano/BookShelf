@@ -26,5 +26,5 @@ model Book {
   title  String
   author String
   volume Int?
-  status Status
+  status Status?
 }
