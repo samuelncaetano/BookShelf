@@ -1,7 +1,9 @@
+import { createBookController } from "@/main/config/createBookFactory";
 import { Request, Response } from "express";
 
-export async function get(_: Request, res: Response): Promise<void> {
-  res.status(200).json({
-    message: "Hello world",
+export async function createBook(req: Request, res: Response): Promise<void> {
+  const { body, statusCode } = await createBookController.handle({
+    body: req.body,
   });
+  res.status(statusCode).send(body);
 }

@@ -6,7 +6,7 @@ import { HttpRequest, HttpResponse, IController } from "./protocols";
 import { Book } from "@/domain/entities/Book";
 import { createdRequest, serverError } from "./helpers";
 
-export class createBookController implements IController {
+export class CreateBookController implements IController {
   constructor(private readonly createBookRepository: ICreateBookRepository) {}
   async handle(
     httpRequest: HttpRequest<CreateBookParams>,

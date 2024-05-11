@@ -1,8 +1,8 @@
 import express from "express";
-import { get } from "./BookServiceRoutes";
+import { createBook } from "./BookServiceRoutes";
 
 const bookRoutes = express.Router();
 
-bookRoutes.get("/", get);
+bookRoutes.post("/", createBook);
 
 export default bookRoutes;
