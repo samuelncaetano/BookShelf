@@ -13,10 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  NOT_STARTED
+  STARTED
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
 model Book {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  title   String
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  title  String
   author String
   volume Int?
-  status String?
+  status Status
 }
