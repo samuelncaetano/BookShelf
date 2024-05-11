@@ -1,27 +1,29 @@
-import { IcreateBook } from "@/application/interfaces/IcreateBook";
-import { BookModel } from "@/domain/entities/bookModel";
+import {
+  CreateBookParams,
+  ICreateBookRepository,
+} from "@/application/interfaces/IcreateBook";
 import { PrismaClient } from "@prisma/client";
+import { Book } from "@/domain/entities/Book";
 
 const prisma = new PrismaClient();
 
-export class PrismaBookRepository implements IcreateBook {
-  async createBook(book: BookModel): Promise<Omit<BookModel, "id">> {
-    const bookDataWithoutId = {
-      title: book.title,
-      author: book.author,
-      volume: book.volume,
-      status: book.status,
-    };
+export class PrismaCreateBooks implements ICreateBookRepository {
+  async createBook(params: CreateBookParams): Promise<Book> {
+    const status = params.status || "NOT_STARTED";
 
-    const created = await prisma.book.create({
-      data: bookDataWithoutId,
+    const createdBook = await prisma.book.create({
+      data: {
+        title: params.title,
+        author: params.author,
+        volume: params.volume,
+        status: status,
+      },
     });
 
-    return {
-      title: created.title,
-      author: created.author,
-      volume: created.volume,
-      status: created.status,
-    };
+    if (!createdBook) {
+      throw new Error("Book not created");
+    }
+
+    return createdBook;
   }
 }
