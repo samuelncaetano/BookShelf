@@ -19,6 +19,7 @@
   "scripts": {
     "start": "tsx src/main/routes/server.ts",
     "start:dev": "tsx watch src/main/routes/server.ts",
+    "test": "vitest",
     "commit": "cz",
     "husky:prepare": "husky install",
     "lint": "eslint .",
@@ -34,7 +35,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mongodb": "^6.6.1"
+    "mongodb": "^6.6.1",
+    "vitest": "^1.6.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
