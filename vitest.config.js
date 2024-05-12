@@ -7,7 +7,7 @@ export default defineConfig({
     tsconfigPaths(),
     AutoImport({
       imports: ["vitest"],
-      dts: true,
+      dts: false,
     }),
   ],
   resolve: {
