@@ -4,7 +4,8 @@ import {
 } from "@/application/interfaces/IcreateBook";
 import { HttpRequest, HttpResponse, IController } from "./protocols";
 import { Book } from "@/domain/entities/Book";
-import { createdRequest, serverError } from "./helpers";
+import { badRequest, createdRequest, serverError } from "./helpers";
+import { CreateBookSchema } from "@/application/services/bookSchema";
 
 export class CreateBookController implements IController {
   constructor(private readonly createBookRepository: ICreateBookRepository) {}
@@ -12,9 +13,23 @@ export class CreateBookController implements IController {
     httpRequest: HttpRequest<CreateBookParams>,
   ): Promise<HttpResponse<Book | string>> {
     try {
+      const validationBook = CreateBookSchema.safeParse(httpRequest.body);
+
+      if (!validationBook.success) {
+        const errorMessage = validationBook.error.errors
+          .map((error) => {
+            const fieldName = error.path[0];
+            return `Field ${fieldName} is ${error.message}`;
+          })
+          .join(", ");
+
+        return badRequest(errorMessage);
+      }
+
       const book = await this.createBookRepository.createBook(
-        httpRequest.body!,
+        validationBook.data,
       );
+
       return createdRequest<Book>(book);
     } catch (error) {
       return serverError();
