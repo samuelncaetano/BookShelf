@@ -1,4 +1,4 @@
-import { createBookController } from "@/main/config/createBookFactory";
+import { createBookController } from "@/main/config/BookFactory";
 import { Request, Response } from "express";
 
 export async function createBook(req: Request, res: Response): Promise<void> {
