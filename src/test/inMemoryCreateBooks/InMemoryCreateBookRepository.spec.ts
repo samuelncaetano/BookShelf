@@ -1,9 +1,8 @@
-import { describe, it, expect } from "vitest";
 import {
   InMemoryCreateBooks,
   InMemoryCreateBookParams,
   InMemoryCreateBookController,
-} from "@/infrastructure/database/InMemoryRepository/InMemoryBookRepository";
+} from "@/infrastructure/database/InMemoryRepository/InMemoryCreateBookRepository";
 
 import { HttpRequest } from "@/main/controllers/protocols";
 
