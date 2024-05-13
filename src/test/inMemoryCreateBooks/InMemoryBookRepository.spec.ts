@@ -122,4 +122,27 @@ describe("InMemoryCreateBookController", () => {
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual("Something went wrong.");
   });
+  it("should create a book even without the volume and status defined", async () => {
+    // Arrange
+    const inMemoryCreateBooks = new InMemoryCreateBooks();
+    const inMemoryCreateBookController = new InMemoryCreateBookController(
+      inMemoryCreateBooks,
+    );
+    const httpRequest: HttpRequest<InMemoryCreateBookParams> = {
+      body: {
+        title: "1984",
+        author: "George Orwell",
+      },
+    };
+    // Act
+    const httpResponse = await inMemoryCreateBookController.handle(httpRequest);
+    // Assert
+    expect(httpResponse.statusCode).toBe(201);
+    expect(httpResponse.body).toEqual({
+      title: "1984",
+      author: "George Orwell",
+      volume: null,
+      status: "NOT_STARTED",
+    });
+  });
 });
