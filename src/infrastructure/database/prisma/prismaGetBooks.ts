@@ -9,4 +9,12 @@ export class PrismaGetBooks implements IgetBooksRepository {
     const getBooks = await prisma.book.findMany({});
     return getBooks;
   }
+  async getBooksById(id: string): Promise<Book | null> {
+    const getBooksById = await prisma.book.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return getBooksById;
+  }
 }
