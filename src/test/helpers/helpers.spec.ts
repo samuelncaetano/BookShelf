@@ -4,7 +4,7 @@ import {
   createdRequest,
   badRequest,
   serverError,
-} from "@/main/controllers/helpers";
+} from "@/main/config/helpers/helpers";
 
 // main/controllers/helpers.ts
 describe("Helpers", () => {

@@ -15,18 +15,17 @@ export default defineConfig({
       "@application": "/src/application",
       "@domain": "/src/domain",
       "@infrastructure": "/src/infrastructure",
-      "@main": "/src/main",
+      "@main": "/src/main/config/helpers",
     },
   },
   test: {
     coverage: {
       provider: "v8",
       exclude: [
-        "**/prismaCreateBooks.ts",
-        "**/createBookFactory.ts",
-        "**/createBookController.ts",
-        "**/routes/**",
         "**/prisma/**",
+        "**/controllers/**",
+        "**/BookFactory.ts",
+        "**/routes/**",
         ...coverageConfigDefaults.exclude,
       ],
     },

@@ -3,12 +3,12 @@ import {
   badRequest,
   createdRequest,
   serverError,
-} from "@/main/controllers/helpers";
+} from "@/main/config/helpers/helpers";
 import {
   HttpRequest,
   HttpResponse,
   IController,
-} from "@/main/controllers/protocols";
+} from "@/main/config/helpers/protocols";
 import { Status as PrismaStatus } from "@prisma/client";
 
 // domain/entities/InMemoryBook.ts

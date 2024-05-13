@@ -3,8 +3,7 @@ import {
   InMemoryCreateBookParams,
   InMemoryCreateBookController,
 } from "@/infrastructure/database/InMemoryRepository/InMemoryCreateBookRepository";
-
-import { HttpRequest } from "@/main/controllers/protocols";
+import { HttpRequest } from "@/main/config/helpers/protocols";
 
 // infrastructure/database/InMemoryCreateBooks.ts
 describe("InMemoryCreateBooks", () => {

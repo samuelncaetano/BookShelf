@@ -1,5 +1,5 @@
-import { PrismaCreateBooks } from "@/infrastructure/database/prismaCreateBooks";
-import { PrismaGetBooks } from "@/infrastructure/database/prismaGetBooks";
+import { PrismaCreateBooks } from "@/infrastructure/database/prisma/prismaCreateBooks";
+import { PrismaGetBooks } from "@/infrastructure/database/prisma/prismaGetBooks";
 
 import { CreateBookController } from "../controllers/createBookController";
 import { GetBooksController } from "../controllers/getBooksController";

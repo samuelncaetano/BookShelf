@@ -2,9 +2,17 @@ import {
   CreateBookParams,
   ICreateBooksRepository,
 } from "@/application/interfaces/IcreateBooks";
-import { HttpRequest, HttpResponse, IController } from "./protocols";
+import {
+  HttpRequest,
+  HttpResponse,
+  IController,
+} from "../config/helpers/protocols";
 import { Book } from "@/domain/entities/Book";
-import { badRequest, createdRequest, serverError } from "./helpers";
+import {
+  badRequest,
+  createdRequest,
+  serverError,
+} from "../config/helpers/helpers";
 import { CreateBookSchema } from "@/application/services/createBookSchema";
 
 export class CreateBookController implements IController {
