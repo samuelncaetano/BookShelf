@@ -1,4 +1,4 @@
-import { CreateBookSchema } from "@/application/services/bookSchema";
+import { CreateBookSchema } from "@/application/services/createBookSchema";
 import {
   badRequest,
   createdRequest,

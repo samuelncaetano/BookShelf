@@ -1,14 +1,14 @@
 import {
   CreateBookParams,
-  ICreateBookRepository,
-} from "@/application/interfaces/IcreateBook";
+  ICreateBooksRepository,
+} from "@/application/interfaces/IcreateBooks";
 import { HttpRequest, HttpResponse, IController } from "./protocols";
 import { Book } from "@/domain/entities/Book";
 import { badRequest, createdRequest, serverError } from "./helpers";
-import { CreateBookSchema } from "@/application/services/bookSchema";
+import { CreateBookSchema } from "@/application/services/createBookSchema";
 
 export class CreateBookController implements IController {
-  constructor(private readonly createBookRepository: ICreateBookRepository) {}
+  constructor(private readonly createBookRepository: ICreateBooksRepository) {}
   async handle(
     httpRequest: HttpRequest<CreateBookParams>,
   ): Promise<HttpResponse<Book | string>> {

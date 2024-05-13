@@ -8,6 +8,6 @@ export interface CreateBookParams {
   status?: PrismaStatus | null;
 }
 
-export interface ICreateBookRepository {
+export interface ICreateBooksRepository {
   createBook(params: CreateBookParams): Promise<Book>;
 }

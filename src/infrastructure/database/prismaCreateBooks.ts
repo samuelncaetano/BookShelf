@@ -1,13 +1,13 @@
 import {
   CreateBookParams,
-  ICreateBookRepository,
-} from "@/application/interfaces/IcreateBook";
+  ICreateBooksRepository,
+} from "@/application/interfaces/IcreateBooks";
 import { PrismaClient } from "@prisma/client";
 import { Book } from "@/domain/entities/Book";
 
 const prisma = new PrismaClient();
 
-export class PrismaCreateBooks implements ICreateBookRepository {
+export class PrismaCreateBooks implements ICreateBooksRepository {
   async createBook(params: CreateBookParams): Promise<Book> {
     const status = params.status || "NOT_STARTED";
 
