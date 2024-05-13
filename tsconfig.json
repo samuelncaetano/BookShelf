@@ -108,6 +108,13 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src", "vitest.config.js", "auto-imports.d.ts"],
+  "include": [
+    "src",
+    "vitest.config.js",
+    "auto-imports.d.ts",
+    "./coverage/block-navigation.js",
+    "./coverage/prettify.js",
+    "./coverage/sorter.js"
+  ],
   "exclude": ["node_modules", "dist"]
 }
