@@ -6,3 +6,7 @@ content-type: application/json
   "title": "1984",
   "author": "George Orwell"
 }
+
+###
+GET  http://localhost:3000
+content-type: application/json
