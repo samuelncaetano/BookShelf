@@ -12,5 +12,13 @@ GET  http://localhost:3000
 content-type: application/json
 
 ###
-GET  http://localhost:3000/66424717a1cb6d3d23aaef28
+GET  http://localhost:3000/
+content-type: application/json
+
+###
+DELETE http://localhost:3000
+content-type: application/json
+
+###
+DELETE http://localhost:3000/6643a40ac704d9410af231bd
 content-type: application/json
