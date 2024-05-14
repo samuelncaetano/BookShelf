@@ -10,4 +10,5 @@ export interface CreateBookParams {
 
 export interface ICreateBooksRepository {
   createBook(params: CreateBookParams): Promise<Book>;
+  createManyBooks(params: CreateBookParams[]): Promise<Book[]>;
 }
