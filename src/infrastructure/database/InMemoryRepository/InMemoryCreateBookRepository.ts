@@ -29,6 +29,7 @@ export interface InMemoryCreateBookParams {
 
 export interface InMemoryCreateBookRepository {
   createBook(params: InMemoryCreateBookParams): Promise<InMemoryBook>;
+  createManyBooks(params: InMemoryCreateBookParams[]): Promise<InMemoryBook[]>;
 }
 
 // infrastructure/database/InMemoryCreateBooks.ts
@@ -47,6 +48,27 @@ export class InMemoryCreateBooks implements InMemoryCreateBookRepository {
 
       this.books.push(book);
       resolve(book);
+    });
+  }
+
+  createManyBooks(params: InMemoryCreateBookParams[]): Promise<InMemoryBook[]> {
+    return new Promise<InMemoryBook[]>((resolve) => {
+      const createdBooks: InMemoryBook[] = [];
+
+      for (const bookParams of params) {
+        const status = bookParams.status || "NOT_STARTED";
+        const newBook: InMemoryBook = {
+          title: bookParams.title || null,
+          author: bookParams.author || null,
+          volume: bookParams.volume || null,
+          status: status,
+        };
+
+        this.books.push(newBook);
+        createdBooks.push(newBook);
+      }
+
+      resolve(createdBooks);
     });
   }
 }
@@ -76,6 +98,37 @@ export class InMemoryCreateBookController implements IController {
 
       const book = await this.inMemoryCreateBooks.createBook(validatedData);
       return createdRequest<InMemoryBook>(book);
+    } catch (error) {
+      return serverError();
+    }
+  }
+}
+
+// main/controllers/InMemoryCreateManyBookController.ts
+export class InMemoryCreateManyBookController implements IController {
+  constructor(private readonly inMemoryCreateBooks: InMemoryCreateBooks) {}
+  async handle(
+    httpRequest: HttpRequest<InMemoryCreateBookParams[]>,
+  ): Promise<HttpResponse<InMemoryBook[] | string>> {
+    try {
+      const validationBooks = httpRequest.body!;
+
+      for (const bookParams of validationBooks) {
+        const validationBook = CreateBookSchema.safeParse(bookParams);
+        if (!validationBook.success) {
+          const errorMessage = validationBook.error.errors
+            .map((error) => {
+              const fieldName = error.path[0];
+              return `Field ${fieldName} is ${error.message}`;
+            })
+            .join(", ");
+          return badRequest(errorMessage);
+        }
+      }
+
+      const createdBooks =
+        await this.inMemoryCreateBooks.createManyBooks(validationBooks);
+      return createdRequest<InMemoryBook[]>(createdBooks);
     } catch (error) {
       return serverError();
     }
