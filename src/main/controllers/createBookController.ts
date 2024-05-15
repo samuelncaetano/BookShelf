@@ -44,3 +44,33 @@ export class CreateBookController implements IController {
     }
   }
 }
+
+export class CreateManyBookController implements IController {
+  constructor(private readonly createBookRepository: ICreateBooksRepository) {}
+  async handle(
+    httpRequest: HttpRequest<CreateBookParams[]>,
+  ): Promise<HttpResponse<Book[] | string>> {
+    try {
+      const validationBooks = httpRequest.body!;
+
+      for (const bookParams of validationBooks) {
+        const validationBook = CreateBookSchema.safeParse(bookParams);
+        if (!validationBook.success) {
+          const errorMessage = validationBook.error.errors
+            .map((error) => {
+              const fieldName = error.path[0];
+              return `Field ${fieldName} is ${error.message}`;
+            })
+            .join(", ");
+          return badRequest(errorMessage);
+        }
+      }
+
+      const createdBooks =
+        await this.createBookRepository.createManyBooks(validationBooks);
+      return createdRequest<Book[]>(createdBooks);
+    } catch (error) {
+      return serverError();
+    }
+  }
+}
