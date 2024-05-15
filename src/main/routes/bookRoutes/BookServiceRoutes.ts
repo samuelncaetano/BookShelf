@@ -1,5 +1,6 @@
 import {
   createBookController,
+  createManyBookController,
   getBooksByIdController,
   getBooksController,
   deleteBookController,
@@ -9,6 +10,16 @@ import { Request, Response } from "express";
 
 export async function createBook(req: Request, res: Response): Promise<void> {
   const { body, statusCode } = await createBookController.handle({
+    body: req.body,
+  });
+  res.status(statusCode).send(body);
+}
+
+export async function createManyBooks(
+  req: Request,
+  res: Response,
+): Promise<void> {
+  const { body, statusCode } = await createManyBookController.handle({
     body: req.body,
   });
   res.status(statusCode).send(body);
