@@ -2,7 +2,10 @@ import { PrismaCreateBooks } from "@/infrastructure/database/prisma/prismaCreate
 import { PrismaGetBooks } from "@/infrastructure/database/prisma/prismaGetBooks";
 import { PrismaDeleteBooks } from "@/infrastructure/database/prisma/prismaDeleteBooks";
 
-import { CreateBookController } from "../controllers/createBookController";
+import {
+  CreateBookController,
+  CreateManyBookController,
+} from "../controllers/createBookController";
 import {
   GetBooksController,
   GetBooksByIdController,
@@ -15,6 +18,9 @@ import {
 //Create
 const prismaCreateBooks = new PrismaCreateBooks();
 const createBookController = new CreateBookController(prismaCreateBooks);
+const createManyBookController = new CreateManyBookController(
+  prismaCreateBooks,
+);
 
 //Get
 const prismaGetBooks = new PrismaGetBooks();
@@ -30,6 +36,7 @@ const deleteBooksByIdController = new DeleteBooksByIdController(
 
 export {
   createBookController,
+  createManyBookController,
   getBooksController,
   getBooksByIdController,
   deleteBookController,
