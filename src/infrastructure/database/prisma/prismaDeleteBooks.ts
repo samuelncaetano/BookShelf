@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 
 export class PrismaDeleteBooks implements IDeleteBooksRepository {
   async deleteBooks(): Promise<Book[] | null> {
-    const deleteBooks = await prisma.book.findMany();
     await prisma.book.deleteMany({});
+    const deleteBooks = await prisma.book.findMany();
     return deleteBooks;
   }
 
