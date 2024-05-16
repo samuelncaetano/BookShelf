@@ -1,8 +1,9 @@
 import {
   createBookController,
   createManyBookController,
-  getBooksByIdController,
   getBooksController,
+  getBooksByIdController,
+  updateBookController,
   deleteBookController,
   deleteBooksByIdController,
 } from "@/main/config/BookFactory";
@@ -32,6 +33,14 @@ export async function getBook(_: Request, res: Response): Promise<void> {
 
 export async function getBooksById(req: Request, res: Response): Promise<void> {
   const { body, statusCode } = await getBooksByIdController.handle({
+    body: req.body,
+    params: req.params,
+  });
+  res.status(statusCode).send(body);
+}
+
+export async function updateBook(req: Request, res: Response): Promise<void> {
+  const { body, statusCode } = await updateBookController.handle({
     body: req.body,
     params: req.params,
   });

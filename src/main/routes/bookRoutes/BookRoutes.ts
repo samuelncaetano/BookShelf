@@ -2,10 +2,11 @@ import express from "express";
 import {
   createBook,
   createManyBooks,
-  deleteBook,
-  deleteBooksById,
   getBook,
   getBooksById,
+  updateBook,
+  deleteBook,
+  deleteBooksById,
 } from "./BookServiceRoutes";
 
 const bookRoutes = express.Router();
@@ -14,6 +15,7 @@ bookRoutes.post("/", createBook);
 bookRoutes.post("/many", createManyBooks);
 bookRoutes.get("/", getBook);
 bookRoutes.get("/:id", getBooksById);
+bookRoutes.patch("/:id", updateBook);
 bookRoutes.delete("/", deleteBook);
 bookRoutes.delete("/:id", deleteBooksById);
 
